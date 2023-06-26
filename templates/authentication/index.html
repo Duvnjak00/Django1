@@ -1,38 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Authentication</title>
-    <link rel="stylesheet" href="">
-    <link name="description" content="">
-  </head>
-  <body>
-    {% for message in messages %}
-    <div class="alert alert={{message.tags}} alert-dismissible fade show" role="alert">
-    <strong>Message:</strong>{{ message }}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Authentication</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      padding: 20px;
+    }
+
+    h3 {
+      color: #333;
+    }
+
+    h2 {
+      color: #4CAF50;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    button a {
+      color: white;
+      text-decoration: none;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .alert {
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+    }
+
+    .alert-success {
+      color: #3c763d;
+      background-color: #dff0d8;
+      border-color: #d6e9c6;
+    }
+
+    .alert-danger {
+      color: #a94442;
+      background-color: #f2dede;
+      border-color: #ebccd1;
+    }
+
+    .close {
+      float: right;
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 1;
+      color: #000;
+      text-shadow: 0 1px 0 #fff;
+      opacity: .2;
+    }
+
+    .close:hover {
+      color: #000;
+      text-decoration: none;
+      opacity: .5;
+    }
+  </style>
+</head>
+<body>
+  {% for message in messages %}
+  <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+    <strong>Message:</strong> {{ message }}
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
+      <span aria-hidden="true">&times;</span>
     </button>
-    </div>
-    {% endfor %}
-    
-    
-    <h3>Welcome to index page.</h3>
+  </div>
+  {% endfor %}
 
+  <h3>Welcome to the index page.</h3>
 
-    {% if user.is_authenticated %}
-    <h2>Hello {{fname}}</h2>
-    <h3>You are successfully logged in :P</h3>
-    <button type="submit"> <a href="/signout">Sign Out</a></button>
+  {% if user.is_authenticated %}
+  <h2>Hello, {{fname}}</h2>
+  <h3>You are successfully logged in. :P</h3>
+  <button type="submit"> <a href="/signout">Sign Out</a></button>
+  {% else %}
+  <button type="submit"> <a href="/signup">Sign Up</a></button>
+  <button type="submit"> <a href="/signin">Sign In</a></button>
+  {% endif %}
 
-
-    {% else %}
-    <button type="submit"> <a href="/signup">Sign Up</a></button>
-    <button type="submit"> <a href="/signin">Sign In</a></button>
-    {% endif %}
-
-	<script src=""></script>
-  </body>
+  <script src=""></script>
+</body>
 </html>
